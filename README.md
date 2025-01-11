@@ -10,8 +10,15 @@ Aplikasi ini masih dalam tahap beta. Kami sangat menghargai masukan dan saran da
 
 ## Fitur
 - Tambah, edit, dan hapus tugas
+  - Pengguna dapat menambahkan tugas baru dengan mengisi formulir tugas.
+  - Tugas yang sudah ada dapat diedit untuk memperbarui informasi.
+  - Tugas yang tidak diperlukan lagi dapat dihapus dari daftar.
 - Tandai tugas sebagai selesai atau belum selesai
+  - Pengguna dapat menandai tugas sebagai selesai dengan mencentang kotak tugas.
+  - Tugas yang sudah selesai dapat ditandai kembali sebagai belum selesai jika diperlukan.
 - Tampilan antarmuka yang sederhana dan mudah digunakan
+  - Antarmuka pengguna dirancang agar intuitif dan mudah dinavigasi.
+  - Pengguna dapat dengan mudah melihat daftar tugas mereka dan status masing-masing tugas.
 
 ## Instalasi
 1. Clone repositori ini:
