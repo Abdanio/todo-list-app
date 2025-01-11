@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const editForm = document.getElementById('editForm');
     const deleteForm = document.getElementById('deleteForm');
+    const archiveForm = document.getElementById('archiveForm');
+    const statusSelects = document.querySelectorAll('.status-select');
 
     if (editForm) {
         editForm.addEventListener('submit', function(event) {
@@ -25,4 +27,24 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'index.php';
         });
     }
+
+    if (archiveForm) {
+        archiveForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Handle archive form submission
+            // Perform AJAX request to archive the to-do item
+            console.log('Archiving item');
+            // Redirect to index.php after successful archive
+            window.location.href = 'index.php';
+        });
+    }
+
+    statusSelects.forEach(select => {
+        select.addEventListener('change', function() {
+            const taskId = this.getAttribute('data-task-id');
+            const newStatus = this.value;
+            // Perform AJAX request to update the task status
+            console.log('Updating status for task', taskId, 'to', newStatus);
+        });
+    });
 });

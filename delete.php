@@ -9,34 +9,40 @@
 <body>
     <h1>Delete To-Do Item</h1>
     <?php
+    // Include the database configuration file
     include 'src/config/database.php';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
+    // Validate the ID from the GET request
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $id = $_GET['id'];
 
-        $sql = "DELETE FROM tasks WHERE id=$id";
+        // Prepare the SQL statement to delete the task
+        $stmt = $conn->prepare("DELETE FROM tasks WHERE id = ?");
+        $stmt->bind_param("i", $id);
 
-        if ($conn->query($sql) === TRUE) {
-            echo "Record deleted successfully";
+        // Execute the statement and check if it was successful
+        if ($stmt->execute() === TRUE) {
+            // Close the statement and connection
+            $stmt->close();
+            $conn->close();
+            // Redirect to the index page
+            header('Location: index.php');
+            exit();
         } else {
-            echo "Error deleting record: " . $conn->error;
+            // Display an error message if the deletion failed
+            echo "<p>Error deleting record: " . $stmt->error . "</p>";
         }
 
-        $conn->close();
-        header('Location: index.php');
-        exit();
+        // Close the statement
+        $stmt->close();
     } else {
-        $id = $_GET['id'];
-        $result = $conn->query("SELECT * FROM tasks WHERE id=$id");
-        $task = $result->fetch_assoc();
+        // Display an error message if the ID is invalid
+        echo "<p>Invalid ID.</p>";
     }
+    // Close the database connection
+    $conn->close();
     ?>
-    <form id="deleteForm" method="POST" action="delete.php">
-        <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
-        <p>Are you sure you want to delete this item?</p>
-        <button type="submit">Yes, Delete</button>
-        <button type="button" onclick="window.location.href='index.php'">Cancel</button>
-    </form>
+    <button type="button" onclick="window.location.href='index.php'">Back to List</button>
     <script src="scripts.js"></script>
 </body>
 </html>
