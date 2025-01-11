@@ -10,7 +10,6 @@ if ($result->num_rows > 0) {
         $tasks[] = $row; // Populate the $tasks array
     }
 } else {
-    echo "No tasks found";
 }
 $conn->close();
 ?>
@@ -53,6 +52,7 @@ $conn->close();
                                 <option value="pending" <?php if ($task['status'] == 'pending') echo 'selected'; ?>>Pending</option>
                                 <option value="in-progress" <?php if ($task['status'] == 'in-progress') echo 'selected'; ?>>In Progress</option>
                                 <option value="completed" <?php if ($task['status'] == 'completed') echo 'selected'; ?>>Completed</option>
+                                <option value="archived" <?php if ($task['status'] == 'archived') echo 'selected'; ?>>Archived</option>
                             </select>
                         </td>
                         <td><?php echo $task['created_at']; ?></td>
@@ -60,6 +60,7 @@ $conn->close();
                         <td>
                             <a href="edit.php?id=<?php echo $task['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
                             <a href="delete.php?id=<?php echo $task['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="archive.php?id=<?php echo $task['id']; ?>" class="btn btn-sm btn-secondary">Archive</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
